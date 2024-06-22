@@ -2,10 +2,21 @@ FROM debian:bookworm
 
 RUN apt-get update -y && apt-get install -y \
   curl \
+  wget \
   git \
   zsh \
   neovim \
+  dnsutils \
+  iputils-ping \
+  awscli \
   && rm -rf /var/lib/apt/lists/*
+
+# Install AWS session manager
+# https://docs.aws.amazon.com/systems-manager/latest/userguide/install-plugin-debian-and-ubuntu.html
+RUN curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_arm64/session-manager-plugin.deb" -o "session-manager-plugin.deb"
+
+RUN dpkg -i session-manager-plugin.deb
+RUN rm -f session-manager-plugin.deb
 
 # Install ohmyzsh
 RUN sh -c \
