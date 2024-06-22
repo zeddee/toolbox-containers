@@ -25,7 +25,8 @@ env:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    # Use macos-latest instead, for arm64/mX comaptibility
+    runs-on: macos-latest 
     permissions:
       contents: read
       packages: write
