@@ -22,16 +22,16 @@ RUN curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubunt
 RUN dpkg -i session-manager-plugin.deb
 RUN rm -f session-manager-plugin.deb
 
+RUN useradd -ms /bin/zsh data
+USER data
+WORKDIR /home/data
+
 # Install ohmyzsh
 RUN sh -c \
   "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
-RUN chsh -s $(which zsh)
-
 RUN sed -i 's/robbyrussell/ys/' $HOME/.zshrc
-
 RUN curl -LO https://raw.githubusercontent.com/zeddee/dotfiles/master/vim_config/vimrc
-
 RUN mkdir -p $HOME/.config/nvim && mv vimrc $HOME/.config/nvim/init.vim
 
 ENTRYPOINT zsh
