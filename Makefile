@@ -1,4 +1,4 @@
-.PHONY: build build-python push push-all push-python
+.PHONY: build build-python build-kube push push-all push-python push-kube
 
 all: build build-python push-all
 
@@ -9,6 +9,9 @@ build:
 build-python: push
 	docker build -t zeddee/toolbox:python -f Dockerfile.python .
 
+build-kube: push
+	docker build -t zeddee/toolbox:kube -f Dockerfile.kube .
+
 push: build
 	docker push zeddee/toolbox:latest
 
@@ -17,6 +20,9 @@ push-all: build build-python
 
 push-python: build-python
 	docker push zeddee/toolbox:python
+
+push-kube: build-kube
+	docker push zeddee/toolbox:kube
 
 
 
