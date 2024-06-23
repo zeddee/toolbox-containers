@@ -5,9 +5,13 @@ RUN apt-get update -y && apt-get install -y \
   wget \
   git \
   zsh \
+  zip \
   neovim \
+  jq \
+  yq \
   dnsutils \
   iputils-ping \
+  tcpdump \
   awscli \
   && rm -rf /var/lib/apt/lists/*
 
